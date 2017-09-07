@@ -2,7 +2,7 @@ package sort
 
 import (
 	"fmt"
-	"github.com/bryce-pilcher/sliceutil"
+	"github.com/bryce-pilcher/util/slice"
 	"math/rand"
 )
 
@@ -63,7 +63,7 @@ func selectKth(l []interface{}, mid int, left int, right int, cmp func(x interfa
 func partition(l []interface{}, left int, right int, idx int, cmp func(x interface{}, y interface{}) (int, error)) (store int) {
 	store = left
 	piv := l[idx]
-	sliceutil.Swap(l, idx, right)
+	slice.Swap(l, idx, right)
 
 	for i := left; i < right; i++ {
 		c, err := cmp(l[i], piv)
@@ -73,11 +73,11 @@ func partition(l []interface{}, left int, right int, idx int, cmp func(x interfa
 		}
 
 		if c > 0 {
-			sliceutil.Swap(l, store, i)
+			slice.Swap(l, store, i)
 			store = store + 1
 		}
 	}
 
-	sliceutil.Swap(l, store, right)
+	slice.Swap(l, store, right)
 	return
 }

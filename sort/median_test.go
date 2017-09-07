@@ -2,7 +2,7 @@ package sort
 
 import (
 	"fmt"
-	"github.com/bryce-pilcher/sliceutil"
+	"github.com/bryce-pilcher/util/slice"
 	"testing"
 )
 
@@ -15,7 +15,7 @@ func TestMedian(t *testing.T) {
 		{[]interface{}{1, 3, 2, 10, 6, 4, 8, 7, 9, 5}, []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}},
 	}
 	for _, c := range cases {
-		in := sliceutil.DeepCopy(c.in)
+		in := slice.DeepCopy(c.in)
 		Median(c.in, compare)
 		pass := false
 		for i, n := range c.in {
