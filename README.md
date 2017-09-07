@@ -37,7 +37,7 @@ This sorts an array like one might sort a hand of cards.  Start at the left side
 of the hand, find the first item out of order, and insert that item where it 
 belongs.
 
-Runtime:
-Best - O(n)
-Average - O(n^2)
-Worst - O(n^2)
+Runtime:  
+Best - O(n)  
+Average - O(n^2)  
+Worst - O(n^2)  
