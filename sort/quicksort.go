@@ -7,8 +7,9 @@ import (
 /*
    This function performs the quicksort algorithm on a slice.
 
-   Quicksort is like Mediansort, but simpler and more efficient.  It cuts
-   out finding the exact median of the slice, which improves average performance.
+   Quicksort is like Median sort, but simpler.  It cuts
+   out finding the exact median of the slice.  This can lead
+   to uneven splits whereas median sort quarantees even splits.
 */
 func Quick(l []interface{}, cmp func(x interface{}, y interface{}) (int, error)) {
 	right := len(l) - 1

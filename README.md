@@ -33,7 +33,7 @@ func compare(x interface{}, y interface{}) (int, error) {
 ```
 
 ### Insertion
-This sorts an array like one might sort a hand of cards.  Start at the left side
+This sorts a slice like one might sort a hand of cards.  Start at the left side
 of the hand, find the first item out of order, and insert that item where it 
 belongs.
 
@@ -41,3 +41,30 @@ Runtime:
 Best - O(n)  
 Average - O(n^2)  
 Worst - O(n^2)  
+
+### Median
+Median sort takes a slice and looks through it to find the median value.  As it
+is doing this, it is also partitioning the slice around a pivot index.  After
+a successful pivot, the values before the pivot are less than the pivot, though
+not necessarily in order.  The same is true of the values after the pivot.
+
+Once it finds the median, it recurses the problem into  smaller subsets and 
+repeats the process.
+
+Runtime:  
+Best - O(n log n)  
+Average - O(n log n)  
+Worst - O(n^2)
+
+### Quicksort
+Quicksort is similar to Median sort, but it does not care about the median
+value, so it skips finding the exact median value and just recurses the smaller
+problems.  There are many variations which can enable a quicker sorting time.
+
+Variations will be built in eventually. These include using a stack rather than 
+recursion for tracking sub problems.  
+
+Runtime:  
+Best - O(n log n)  
+Average - O(n log n)  
+Worst - O(n^2)
