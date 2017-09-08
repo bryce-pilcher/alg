@@ -1,9 +1,7 @@
 package sort
 
 import (
-	"fmt"
-	"github.com/bryce-pilcher/util/slice"
-	"math/rand"
+	"github.com/bryce-pilcher/util/rand"
 )
 
 /*
@@ -17,19 +15,19 @@ import (
 */
 func Median(l []interface{}, cmp func(x interface{}, y interface{}) (int, error)) {
 	right := len(l) - 1
-	sort(l, 0, right, cmp)
+	mediansort(l, 0, right, cmp)
 }
 
 /*
    A recursive function that handles the partitioning of the array into smaller sizes
    The return from selectKth is not actively used, that is why it is ignored.
 */
-func sort(l []interface{}, left int, right int, cmp func(x interface{}, y interface{}) (int, error)) {
+func mediansort(l []interface{}, left int, right int, cmp func(x interface{}, y interface{}) (int, error)) {
 	if left < right {
 		mid := (right - left + 1) / 2
 		_ = selectKth(l, mid+1, left, right, cmp)
-		sort(l, left, left+mid-1, cmp)
-		sort(l, left+mid+1, right, cmp)
+		mediansort(l, left, left+mid-1, cmp)
+		mediansort(l, left+mid+1, right, cmp)
 	}
 }
 
@@ -41,7 +39,7 @@ func selectKth(l []interface{}, mid int, left int, right int, cmp func(x interfa
 	// Go does not provide a function for getting a random value
 	// from a range, so this bounds the random value between
 	// left and right
-	idx := int(rand.Float64()*float64(right-left)) + left
+	idx := rand.RangeInt(left, right)
 	pivotIdx = partition(l, left, right, idx, cmp)
 	if (left + mid - 1) == pivotIdx {
 		return
@@ -52,32 +50,4 @@ func selectKth(l []interface{}, mid int, left int, right int, cmp func(x interfa
 	} else {
 		return selectKth(l, mid-(pivotIdx-left+1), pivotIdx+1, right, cmp)
 	}
-}
-
-/*
-   partition separates the array into two halves around a pivot point.
-   The values before the pivot point in the slice are also less than the
-   value at the pivot point, although not necessarily in order.  Same for
-   the values after the pivot point in the slice, the values are greater.
-*/
-func partition(l []interface{}, left int, right int, idx int, cmp func(x interface{}, y interface{}) (int, error)) (store int) {
-	store = left
-	piv := l[idx]
-	slice.Swap(l, idx, right)
-
-	for i := left; i < right; i++ {
-		c, err := cmp(l[i], piv)
-		if err != nil {
-			fmt.Println(err)
-			break
-		}
-
-		if c > 0 {
-			slice.Swap(l, store, i)
-			store = store + 1
-		}
-	}
-
-	slice.Swap(l, store, right)
-	return
 }
