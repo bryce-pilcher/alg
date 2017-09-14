@@ -1,13 +1,13 @@
 package sort
 
 import (
-	"errors"
 	"fmt"
 	"github.com/bryce-pilcher/util/slice"
 	"testing"
 )
 
-func TestInsertion(t *testing.T) {
+// compare used in this function is found in insertion_test.go
+func TestHeap(t *testing.T) {
 	cases := []struct {
 		in, want []interface{}
 	}{
@@ -16,7 +16,7 @@ func TestInsertion(t *testing.T) {
 	}
 	for _, c := range cases {
 		in := slice.DeepCopy(c.in)
-		Insertion(c.in, compare)
+		HeapSort(c.in, compare)
 		pass := false
 		for i, n := range c.in {
 			if n == c.want[i] {
@@ -27,23 +27,9 @@ func TestInsertion(t *testing.T) {
 			}
 		}
 		if !pass {
-			t.Errorf("Insertion(%d)==%d, want %d\n", in, c.in, c.want)
+			t.Errorf("HeapSort(%d)==%d, want %d\n", in, c.in, c.want)
 		} else {
-			fmt.Printf("Insertion(%d) == %d\n", in, c.want)
+			fmt.Printf("HeapSort(%d) == %d\n", in, c.want)
 		}
 	}
-}
-
-func compare(x interface{}, y interface{}) (int, error) {
-	a := x.(int)
-	b := y.(int)
-	switch {
-	case a < b:
-		return -1, nil
-	case a == b:
-		return 0, nil
-	case a > b:
-		return 1, nil
-	}
-	return 0, errors.New("something went wrong in comparison")
 }

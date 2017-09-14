@@ -23,7 +23,7 @@ func partition(l []interface{}, left int, right int, idx int, cmp func(x interfa
 			break
 		}
 
-		if c > 0 {
+		if c < 0 {
 			slice.Swap(l, store, i)
 			store = store + 1
 		}
@@ -31,4 +31,18 @@ func partition(l []interface{}, left int, right int, idx int, cmp func(x interfa
 
 	slice.Swap(l, store, right)
 	return
+}
+
+/*
+   Checks an error and panics if the err is not nil and p is true, otherwise
+   just prints the err if not nil.
+*/
+func checkerror(err error, p bool) {
+	if err != nil {
+		if p {
+			panic(err)
+		} else {
+			fmt.Println(err)
+		}
+	}
 }

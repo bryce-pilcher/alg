@@ -30,7 +30,7 @@ func insert(l []interface{}, pos int, value interface{}, cmp func(x interface{},
 			fmt.Println(err)
 			return
 		}
-		if c > 0 {
+		if c < 0 {
 			l[i+1] = l[i]
 			i = i - 1
 		} else {

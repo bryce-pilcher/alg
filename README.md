@@ -22,11 +22,11 @@ func compare(x interface{}, y interface{}) (int, error) {
 	b := y.(int)
 	switch {
 	case a < b:
-		return 1, nil
+		return -1, nil
 	case a == b:
 		return 0, nil
 	case a > b:
-		return -1, nil
+		return 1, nil
 	}
 	return 0, errors.New("Something went wrong in the comparison!")
 }
