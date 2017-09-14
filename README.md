@@ -68,3 +68,16 @@ Runtime:
 Best - O(n log n)  
 Average - O(n log n)  
 Worst - O(n^2)
+
+### Heap Sort
+Heap sort works differently than all of the above algorithms.  Instead of 
+operating directly on the slice, it converts the slice to a heap and then sorts
+the heap. You may notice, there is no heap data structure used; it reorders the
+slice in a way that represents a heap.  This aids the function in simply 
+copying the largest value to the end of the array, and then re-heaping the new
+subarray.  
+
+Runtime:
+Best - O(n log n)
+Average - O(n log n)
+Worst - O(n log n)
