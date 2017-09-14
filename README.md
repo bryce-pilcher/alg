@@ -77,7 +77,7 @@ slice in a way that represents a heap.  This aids the function in simply
 copying the largest value to the end of the array, and then re-heaping the new
 subarray.  
 
-Runtime:
-Best - O(n log n)
-Average - O(n log n)
+Runtime:  
+Best - O(n log n)  
+Average - O(n log n)  
 Worst - O(n log n)
