@@ -13,12 +13,11 @@ import (
      Average: O(n^2)
        Worst: O(n^2)
 */
-func Insertion(l []interface{}, cmp func(x interface{}, y interface{}) (int, error)) (sorted []interface{}) {
+func Insertion(l []interface{}, cmp func(x interface{}, y interface{}) (int, error)) {
 	n := len(l)
 	for i := 1; i < n; i++ {
 		insert(l, i, l[i], cmp)
 	}
-	return
 }
 
 // This function performs the insertion of the object at the correct location

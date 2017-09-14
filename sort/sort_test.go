@@ -4,6 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bryce-pilcher/util/slice"
+	"reflect"
+	"runtime"
 	"testing"
 )
 
@@ -14,22 +16,27 @@ func TestInsertion(t *testing.T) {
 		{[]interface{}{1, 3, 2}, []interface{}{1, 2, 3}},
 		{[]interface{}{1, 3, 2, 10, 6, 4, 8, 7, 9, 5}, []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}},
 	}
+	functions := []interface{}{Insertion, Median, Quick, HeapSort}
+
 	for _, c := range cases {
 		in := slice.DeepCopy(c.in)
-		Insertion(c.in, compare)
-		pass := false
-		for i, n := range c.in {
-			if n == c.want[i] {
-				pass = true
-			} else {
-				pass = false
-				break
+		for _, f := range functions {
+			f.(func(l []interface{}, cmp func(x interface{}, y interface{}) (int, error)))(c.in, compare)
+			pass := false
+			for i, n := range c.in {
+				if n == c.want[i] {
+					pass = true
+				} else {
+					pass = false
+					break
+				}
 			}
-		}
-		if !pass {
-			t.Errorf("Insertion(%d)==%d, want %d\n", in, c.in, c.want)
-		} else {
-			fmt.Printf("Insertion(%d) == %d\n", in, c.want)
+			name := runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
+			if !pass {
+				t.Errorf("%s(%d)==%d, want %d\n", name, in, c.in, c.want)
+			} else {
+				fmt.Printf("%s(%d) == %d\n", name, in, c.want)
+			}
 		}
 	}
 }
